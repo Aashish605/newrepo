@@ -13,7 +13,7 @@ export default function Protectedroute() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/check", {
+        const response = await axios.get("https://newrepo-backend.vercel.app/check", {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",

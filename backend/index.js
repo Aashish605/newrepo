@@ -18,7 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://foodking-eta.vercel.app",
+      "https://newrepo-frontend.vercel.app",
 
       "http://localhost:5173"
     ],

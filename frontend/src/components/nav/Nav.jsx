@@ -10,7 +10,7 @@ export default function Nav() {
 
 
     const [searchbar, setsearchbar] = useState(false);
-    const { toggleSidebar, isSidebarOpen , isAuthenticated } = useSidebar();
+    const { toggleSidebar, isSidebarOpen } = useSidebar();
     const [handleplaceholder, sethandleplaceholder] = useState();
     const [deltaY, setdeltaY] = useState(0);
 

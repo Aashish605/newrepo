@@ -4,7 +4,6 @@ const SidebarContext = createContext();
 
 export const SidebarProvider = ({ children }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (isSidebarOpen && !e.target.closest('.sidebar')) {
@@ -42,7 +41,7 @@ export const SidebarProvider = ({ children }) => {
     };
 
     return (
-        <SidebarContext.Provider value={{ isSidebarOpen, setIsSidebarOpen, toggleSidebar, isAuthenticated,setIsAuthenticated }}>
+        <SidebarContext.Provider value={{ isSidebarOpen, setIsSidebarOpen, toggleSidebar }}>
             {children}
         </SidebarContext.Provider>
     );

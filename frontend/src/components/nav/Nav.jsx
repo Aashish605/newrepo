@@ -7,7 +7,7 @@ export default function Nav() {
     const navigate = useNavigate()
 
     const [searchbar, setsearchbar] = useState(false);
-    const { toggleSidebar, isSidebarOpen, isAuthenticated } = useSidebar();
+    const { toggleSidebar, isSidebarOpen } = useSidebar();
     const [handleplaceholder, sethandleplaceholder] = useState();
     const [deltaY, setdeltaY] = useState(0);
 
@@ -153,16 +153,6 @@ export default function Nav() {
                         }
                     >
                         About Us
-                    </NavLink>
-                    <NavLink
-                        to="/aboutus"
-                        className={({ isActive }) =>
-                            `hover:underline hover:underline-offset-4 my-1 hover:decoration-0 opacity-60 
-                        ${!isAuthenticated ? "hidden" : ""} 
-                        ${isActive ? `font-medium underline underline-offset-4 decoration-1 opacity-100` : ""}`
-                        }
-                    >
-                        adminpanel
                     </NavLink>
                 </div>
                 <div className="flex items-center gap-4">

@@ -6,11 +6,8 @@ export default function Nav() {
 
     const navigate = useNavigate()
 
-
-
-
     const [searchbar, setsearchbar] = useState(false);
-    const { toggleSidebar, isSidebarOpen } = useSidebar();
+    const { toggleSidebar, isSidebarOpen, isAuthenticated } = useSidebar();
     const [handleplaceholder, sethandleplaceholder] = useState();
     const [deltaY, setdeltaY] = useState(0);
 
@@ -59,20 +56,20 @@ export default function Nav() {
 
     useEffect(() => {
         const handleSearchBar = (e) => {
-            if (searchbar){
+            if (searchbar) {
                 document.body.style.overflow = 'hidden'
             }
-            else{
+            else {
                 document.body.style.overflow = ''
             }
-            if(searchbar && !e.target.closest('.sidebar') ){
+            if (searchbar && !e.target.closest('.sidebar')) {
                 setsearchbar(!searchbar)
             }
         }
         window.addEventListener("click", handleSearchBar)
         return () => {
             window.removeEventListener("click", handleSearchBar)
-            document.body.style.overflow=''
+            document.body.style.overflow = ''
         };
     }, [searchbar]);
 
@@ -143,7 +140,8 @@ export default function Nav() {
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
-                            `hover:underline hover:underline-offset-4 my-1 hover:decoration-0 opacity-60 ${isActive ? `font-medium underline underline-offset-4 decoration-1 opacity-100` : ""}`
+                            `hover:underline hover:underline-offset-4 my-1 hover:decoration-0 opacity-60
+                        ${isActive ? `font-medium underline underline-offset-4 decoration-1 opacity-100` : ""}`
                         }
                     >
                         Menu
@@ -159,7 +157,9 @@ export default function Nav() {
                     <NavLink
                         to="/aboutus"
                         className={({ isActive }) =>
-                            `hover:underline hover:underline-offset-4 my-1 hover:decoration-0 opacity-60 ${isActive ? `font-medium underline underline-offset-4 decoration-1 opacity-100` : ""}`
+                            `hover:underline hover:underline-offset-4 my-1 hover:decoration-0 opacity-60 
+                        ${!isAuthenticated ? "hidden" : ""} 
+                        ${isActive ? `font-medium underline underline-offset-4 decoration-1 opacity-100` : ""}`
                         }
                     >
                         adminpanel

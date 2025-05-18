@@ -1,13 +1,17 @@
 // components/protectedroute/Protectedroute.jsx
 import { useState, useEffect } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { useSidebar } from "./Sidebarcontext"
+
 import axios from "axios";
 
 export default function Protectedroute() {
 
-  // acheck
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated ,setIsAuthenticated} = useSidebar();
+
+
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

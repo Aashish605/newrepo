@@ -49,7 +49,7 @@ export default function Special_eachitem() {
         const response = await axios.get("https://newrepo-backend.vercel.app/database");
         const filterResponse = response.data.filter((item) => item.category === "Veg")
         setItem(filterResponse.map(item => ({ ...item, Quantity: 1 })));
-        console.log(filterResponse.map(item => ({ ...item, Quantity: 1 })));
+        // console.log(filterResponse.map(item => ({ ...item, Quantity: 1 })));
 
         setLoading(false);
       } catch (err) {
@@ -86,7 +86,7 @@ export default function Special_eachitem() {
     const existingOrders = JSON.parse(localStorage.getItem("cart")) || {};
     const tableCart = existingOrders[tableId] || [];
     const existingItem = tableCart.find(e => e.productname === item.productname)
-    console.log(existingItem, "exist");
+    // console.log(existingItem, "exist");
     if (existingItem) {
       existingItem.Quantity += Quantity ;
     }
@@ -98,7 +98,7 @@ export default function Special_eachitem() {
       [tableId]: tableCart,
     };
     localStorage.setItem("cart", JSON.stringify(updatedOrders));
-    console.log("updated cart", tableCart);
+    // console.log("updated cart", tableCart);
   };
 
   const updateQuantity = (id,amount) => {

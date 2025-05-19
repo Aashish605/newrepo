@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useForm } from 'react-hook-form';
 import axios from "axios";
 export default function Signup() {
 
@@ -69,9 +68,9 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen  flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="bg-indigo-600 py-4 px-6 text-white text-center font-semibold text-xl tracking-wider">
+        <div className="bg-gray-300 py-4 px-6 text-black text-center font-semibold text-xl tracking-wider">
           Admin Signup
         </div>
         <form
@@ -115,17 +114,16 @@ export default function Signup() {
             />
           </div>
           <div className="mb-6 relative">
-            {" "}
-            {/* Add relative positioning here */}
             <label
               htmlFor="password"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
               password
             </label>
-            <input
+            <div className="relative">
+              <input
               autoComplete="off"
-              type={showpassword ? "text" : "password"} // Dynamically set input type
+              type={showpassword ? "text" : "password"}
               id="password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               placeholder="********"
@@ -133,7 +131,7 @@ export default function Signup() {
               onChange={(e) => setpassword(e.target.value)}
             />
             <span
-              className="absolute inset-y-0 right-0 bottom-15 md:bottom-8 pr-3 flex items-center cursor-pointer"
+              className="absolute  right-4 bottom-6  flex items-center cursor-pointer"
               onClick={togglepasswordVisibility}
             >
               {showpassword ? (
@@ -142,6 +140,7 @@ export default function Signup() {
                 <FaEye className="h-5 w-5 text-gray-500" />
               )}
             </span>
+            </div>
             {!Validpass ? (
               <label className="text-red-500" htmlFor="password">
                 password must contain at least 8 characters, including
@@ -158,13 +157,6 @@ export default function Signup() {
             >
               Sign Up
             </button>
-            {/* You can add a signup button or link here if needed */}
-            {/* <button
-              className="inline-block align-baseline font-bold text-sm text-indigo-500 hover:text-indigo-800"
-              type="button"
-            >
-              Log In
-            </button> */}
           </div>
         </form>
       </div>

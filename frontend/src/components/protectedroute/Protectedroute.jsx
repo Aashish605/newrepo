@@ -38,7 +38,7 @@ export default function Protectedroute() {
 
   // Show loading state while checking authentication
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="h-[50vh] w-full flex items-center justify-center text-3xl ">Loading...</div>;
   }
 
   // Redirect to login if not authenticated

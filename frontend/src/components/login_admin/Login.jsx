@@ -28,10 +28,10 @@ export default function Login() {
       console.log("this is handleLogin function");
       console.log(username, password);
 
-      const response = await axios.post("https://newrepo-backend.vercel.app/logIn",{
-          username,
-          password,
-        },
+      const response = await axios.post("https://newrepo-backend.vercel.app/logIn", {
+        username,
+        password,
+      },
         {
           withCredentials: true,
           headers: {
@@ -57,9 +57,9 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen  flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="bg-indigo-600 py-4 px-6 text-white text-center font-semibold text-xl tracking-wider">
+        <div className="bg-gray-300 py-4 px-6 text-black text-center font-semibold text-xl tracking-wider">
           Admin Login
         </div>
         <form className="p-6" onSubmit={handleLogin}>
@@ -80,34 +80,34 @@ export default function Login() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <div className="mb-6 relative">
-            {" "}
-            {/* Add relative positioning here */}
+          <div className=" ">
             <label
               htmlFor="password"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
               password
             </label>
-            <input
-              autoComplete="off"
-              type={showPassword ? "text" : "password"} // Dynamically set input type
-              id="password"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="********"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <span
-              className="absolute inset-y-0 right-0 bottom-15 md:bottom-8 pr-3 flex items-center cursor-pointer"
-              onClick={togglePasswordVisibility}
-            >
-              {showPassword ? (
-                <FaEyeSlash className="h-5 w-5 text-gray-500" />
-              ) : (
-                <FaEye className="h-5 w-5 text-gray-500" />
-              )}
-            </span>
+            <div className="relative">
+              <input
+                autoComplete="off"
+                type={showPassword ? "text" : "password"} // Dynamically set input type
+                id="password"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span
+                className="absolute  right-4 bottom-5  flex items-center cursor-pointer"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <FaEyeSlash className="h-5 w-5 text-gray-500" />
+                ) : (
+                  <FaEye className="h-5 w-5 text-gray-500" />
+                )}
+              </span>
+            </div>
             {!Validpass ? (
               <label className="text-red-500" htmlFor="Password">
                 Password must contain at least 8 characters, including

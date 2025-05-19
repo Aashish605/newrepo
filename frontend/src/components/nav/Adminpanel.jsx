@@ -26,9 +26,9 @@ export default function Adminpanel() {
 
   if (loading) {
     return (
-      <div className="p-6 flex justify-center items-center">
+      <div className="mt-[10vh] flex flex-col justify-center items-center">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
-        <span className="ml-3">Loading order data...</span>
+        <span className=" h-[50vh] w-full text-center  text-3xl ">Loading order data...</span>
       </div>
     );
   }
@@ -90,7 +90,7 @@ export default function Adminpanel() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 min-h-[50vh]">
       <h1 className="lg:text-2xl text-xl text-center  font-bold my-4">
         Admin Panel - Order Management
       </h1>

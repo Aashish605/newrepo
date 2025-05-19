@@ -7,7 +7,7 @@ export default function AdminOrderList({
   handlePaid,
 }) {
   return (
-    <div className="w-full overflow-x-auto text-center min-h-[40vh] ">
+    <div className="w-full overflow-x-auto text-center my-8 min-h-[40vh] ">
       <table className="w-3/5 bg-white shadow-md rounded-lg m-auto">
         <thead className="bg-gray-100">
           <tr>

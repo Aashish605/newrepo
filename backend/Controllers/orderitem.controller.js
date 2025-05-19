@@ -3,16 +3,6 @@ import moment from "moment-timezone";
 export const postsaveorders = async (req, res) => {
   try {
     const { items, totalAmount, tableId } = req.body;
-    const now = new Date();
-    const midnight = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() + 1, // Tomorrow
-      0,
-      0,
-      0,
-      0
-    );
     if (
       !items ||
       !Array.isArray(items) ||
@@ -26,7 +16,6 @@ export const postsaveorders = async (req, res) => {
       items: items,
       totalAmount: totalAmount,
       tableId: tableId,
-      deleteAt : midnight,
     });
     await newOrder.save();
     res.status(201).json({ message: "Order placed successfully" });

@@ -32,9 +32,10 @@ app.use(
 app.use(express.json());
 
 
+//session which is saved in the same database as other data and we save the collection inside the same db.
 const MongoStore = new connectMongo({
-  mongoUrl: process.env.MONGOURL,
-  collectionName: "sessions", s
+  mongoUrl: process.env.MONGOURL, // Reuse the same MongoDB connection string
+  collectionName: "sessions", // Custom collection for sessions
 });
 
 app.set('trust proxy', 1)
@@ -42,14 +43,14 @@ app.set('trust proxy', 1)
 app.use(session({
   store: MongoStore,
   secret: process.env.SECRET,
-  resave: true,              
+  resave: true,              // Changed to true to ensure session is saved
   saveUninitialized: false,
-  proxy: true,             
+  proxy: true,               // Trust the reverse proxy
   cookie: {
-    secure: true,           
+    secure: true,            // Required for HTTPS
     httpOnly: true,
-    sameSite: 'none',       
-    maxAge: 1000 * 60 * 60 * 24 * 7,  
+    sameSite: 'none',       // Required for cross-origin
+    maxAge: 1000 * 60 * 60 * 24 * 7,  // 7 days
     path: '/',
   }
 }));

@@ -17,10 +17,23 @@ export default function Nav() {
     console.log(tableId);
     
     
-    useEffect(() => {
-        setTableId(searchParams.get("tableId"));
-    }, []);
+    // useEffect(() => {
+    //     setTableId(searchParams.get("tableId"));
+    // }, []);
 
+        useEffect(() => {
+        const id = searchParams.get("tableId");
+        if (id) {
+            setTableId(id);
+
+            // Set a timeout to clear the tableId after the specified time limit
+            const timeoutId = setTimeout(() => {
+                setTableId(null);
+            }, 60 * 60 * 1000);
+
+            return () => clearTimeout(timeoutId);
+        }
+    }, []);
 
 
 

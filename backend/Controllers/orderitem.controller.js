@@ -1,8 +1,9 @@
+import { request } from "express";
 import Orderitem from "../Models/orderitem.Model.js";
 import moment from "moment-timezone";
 export const postsaveorders = async (req, res) => {
   try {
-    const { items, totalAmount, tableId } = req.body;
+    const { items, totalAmount, tableId,request } = req.body;
     const now = new Date();
     const midnight = new Date(
       now.getFullYear(),
@@ -14,19 +15,20 @@ export const postsaveorders = async (req, res) => {
       0
     );
     if (
-      !items ||
-      !Array.isArray(items) ||
-      items.length === 0 ||
+      (!items ||
       !totalAmount ||
-      !tableId
+      !tableId )
     ) {
-      return res.status(400).json({ error: "Invalid data in saveorders." });
+      if (!request) {
+        return res.status(400).json({ error: "Invalid data in saveorders." });
+      }
     }
     const newOrder = new Orderitem({
       items: items,
       totalAmount: totalAmount,
       tableId: tableId,
       deleteAt: midnight,
+      request :  request,
     });
     await newOrder.save();
     res.status(201).json({ message: "Order placed successfully" });

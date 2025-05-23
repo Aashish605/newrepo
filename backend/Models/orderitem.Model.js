@@ -6,6 +6,7 @@ const orderitemSchema = new mongoose.Schema(
     totalAmount: { type: Number, required: true },
     OrderDate: { type: Date, default: Date.now(), required: true },
     tableId: { type: String, required: true },
+    request: { type: String, required: true },
     paid: { type: Boolean, default: false },
     deleteAt: { type: Date, default: null },
   },

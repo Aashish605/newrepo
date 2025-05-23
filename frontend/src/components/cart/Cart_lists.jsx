@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 export default function Cart_lists() {
   const [eachtotal, setEachtotal] = useState([]);
   const [cartItems, setcartItems] = useState([]);
+  const [request, setRequest] = useState();
   const [isOrdering, setIsOrdering] = useState(false);
   const [searchParams] = useSearchParams();
   const tableId = searchParams.get("tableId");
@@ -28,7 +29,7 @@ export default function Cart_lists() {
     } catch (error) {
       console.error("Error in showing data", error);
     }
-  }, [tableId]);
+  });
 
   useEffect(() => {
     if (Array.isArray(cartItems)) {
@@ -72,9 +73,10 @@ export default function Cart_lists() {
       setIsOrdering(true);
       const totalAmount = calculateTotal();
       await axios.post("https://newrepo-backend.vercel.app/saveorders", {
-        items: cartItems,
-        totalAmount: totalAmount,
+        items: cartItems  || [] ,
+        totalAmount: totalAmount ||  0,
         tableId: tableId,
+        request :request,
       });
 
       const storedCarts = JSON.parse(localStorage.getItem("cart") || "{}");
@@ -84,6 +86,7 @@ export default function Cart_lists() {
       }
       setcartItems([]);
       setEachtotal([]);
+      setRequest()
     } catch (error) {
       console.error("Error placing order:", error);
       alert("Error occurs while placing an order!!!");
@@ -188,6 +191,17 @@ export default function Cart_lists() {
             Your cart is empty.
           </p>
         )}
+
+        <div className="mt-6 flex flex-col  justify-center ">
+          <label className="text-center mb-4 text-xl" htmlFor="request">Any Request !!!</label>
+          <input id="request" type="text" className="h-[10vh] w-[30vw] border-1 outline-0 rounded-md px-2 mx-auto "
+            onChange={(e) => {
+              setRequest(e.target.value)
+            }
+            }
+          />
+        </div>
+
         <div className="mt-6 flex justify-center ">
           <button
             className="bg-green-500 text-white rounded-md px-4 py-2 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-sm md:text-base"

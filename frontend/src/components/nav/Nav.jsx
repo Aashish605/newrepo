@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { useSidebar } from "./Sidebarcontext"
 import { NavLink } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import Search from '../Search/Search';
 
 
 export default function Nav() {
 
-    const [tableId , setTableId] = useState();
+    const [tableId, setTableId] = useState();
     const [searchbar, setsearchbar] = useState(false);
     const { toggleSidebar, isSidebarOpen } = useSidebar();
     const [handleplaceholder, sethandleplaceholder] = useState();
@@ -15,13 +16,9 @@ export default function Nav() {
 
 
     console.log(tableId);
-    
-    
-    // useEffect(() => {
-    //     setTableId(searchParams.get("tableId"));
-    // }, []);
 
-        useEffect(() => {
+
+    useEffect(() => {
         const id = searchParams.get("tableId");
         if (id) {
             setTableId(id);
@@ -174,7 +171,7 @@ export default function Nav() {
                         ${isActive ? `font-medium underline underline-offset-4 decoration-1 opacity-100` : ""}`
                         }
                     >
-                        Menu 
+                        Menu
                     </NavLink>
                     <NavLink
                         to="/aboutus"
@@ -190,7 +187,7 @@ export default function Nav() {
                         <input type="text" id="search"
                             className={`border-[1px] bg-transparent  placeholder-gray-800 outline-none w-[15vw] border-black px-4 py-3 rounded-3xl
                             `}
-                            onChange={(e) => { e.target.value ? sethandleplaceholder(true) : sethandleplaceholder(false) }}
+                            onChange={(e) => { e.target.value ? (sethandleplaceholder(e.target.value)) : sethandleplaceholder() }}
                         />
                         <p className={`absolute bottom-3 left-4  group-focus-within:translate-y-[-1rem] group-focus-within:text-xs group-focus-within:opacity-60  ${handleplaceholder ? "translate-y-[-1rem] opacity-60 text-xs " : ""}`}>
                             Search
@@ -200,6 +197,9 @@ export default function Nav() {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" className="icon hover:w-[1.35rem] icon-account cursor-pointer w-5" viewBox="0 0 18 19"><path fill="currentColor" fillRule="evenodd" d="M6 4.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8m5.58 12.15c1.12.82 1.83 2.24 1.91 4.85H1.51c.08-2.6.79-4.03 1.9-4.85C4.66 11.75 6.5 11.5 9 11.5s4.35.26 5.58 1.15M9 10.5c-2.5 0-4.65.24-6.17 1.35C1.27 12.98.5 14.93.5 18v.5h17V18c0-3.07-.77-5.02-2.33-6.15-1.52-1.1-3.67-1.35-6.17-1.35" clipRule="evenodd"></path></svg>
                     </NavLink>
                 </div>
+                <Search
+                    query={handleplaceholder}
+                />
             </nav>
         </>
     );

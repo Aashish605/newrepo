@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -9,13 +9,17 @@ const TableIdUpdate = (props) => {
     const navigate = useNavigate();
 
     const updateId = async () => {
-        await axios.patch("https://newrepo-backend.vercel.app/updateId",{
-            _id : orderId,
-            tableId : value
-        })
-        navigate("/adminpanel")
+        try {
+            await axios.patch("https://newrepo-backend.vercel.app/updateId", {
+                _id: orderId,
+                tableId: value
+            });
+            navigate("/adminpanel");
+        } catch (err) {
+            alert("Failed to update table ID");
+            console.error(err);
+        }
     }
-
 
     return (
         <>
@@ -30,11 +34,12 @@ const TableIdUpdate = (props) => {
                     </p>
                     <p>
                         <label htmlFor="new" className='text-xl'>New Table Id : </label>
-                        <input type="number" className='border-2 rounded-md my-6 px-2 w-[5vw] ' name="" id="new" 
-                        onChange={(e) => {
-                            setValue(e.target.value)
-                        }
-                        }
+                        <input type="number" className='border-2 rounded-md my-6 px-2 w-[5vw] ' name="" id="new"
+                            value={value}
+                            onChange={(e) => {
+                                setValue(e.target.value)
+                            }
+                            }
                         />
                     </p>
                     <button

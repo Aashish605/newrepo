@@ -3,7 +3,7 @@ import Orderitem from "../Models/orderitem.Model.js";
 import moment from "moment-timezone";
 export const postsaveorders = async (req, res) => {
   try {
-    const { items, totalAmount, tableId,request } = req.body;
+    const { items, totalAmount, tableId, request } = req.body;
     const now = new Date();
     const midnight = new Date(
       now.getFullYear(),
@@ -16,8 +16,8 @@ export const postsaveorders = async (req, res) => {
     );
     if (
       (!items ||
-      !totalAmount ||
-      !tableId )
+        !totalAmount ||
+        !tableId)
     ) {
       if (!request) {
         return res.status(400).json({ error: "Invalid data in saveorders." });
@@ -28,7 +28,7 @@ export const postsaveorders = async (req, res) => {
       totalAmount: totalAmount,
       tableId: tableId,
       deleteAt: midnight,
-      request :  request,
+      request: request,
     });
     await newOrder.save();
     res.status(201).json({ message: "Order placed successfully" });
@@ -89,3 +89,20 @@ export const patchorders = async (req, res) => {
     res.status(500).json({ error: "Internal server error." });
   }
 };
+
+export const postupdateId = async (req, res) => {
+  try {
+    const order = await Orderitem.findByIdAndUpdate(
+      req.body._id,
+      { tableId: req.body.tableId },
+      { new: true }
+    );
+    if (!order) {
+      return res.status(404).json({ error: "Order not found." });
+    }
+    res.json(order);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+}

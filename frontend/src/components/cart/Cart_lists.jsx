@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../nav/Nav";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function Cart_lists() {
   const [eachtotal, setEachtotal] = useState([]);
@@ -10,6 +10,8 @@ export default function Cart_lists() {
   const [request, setRequest] = useState();
   const [isOrdering, setIsOrdering] = useState(false);
   const [searchParams] = useSearchParams();
+
+  const navigate = useNavigate()
   const tableId = searchParams.get("tableId");
 
   useEffect(() => {
@@ -76,9 +78,10 @@ export default function Cart_lists() {
         items: cartItems  || [] ,
         totalAmount: totalAmount ||  0,
         tableId: tableId,
-        request :request,
+        request :request || '',
       });
 
+      // navigate(`?tableId=${tableId}`)
       const storedCarts = JSON.parse(localStorage.getItem("cart") || "{}");
       if (storedCarts[tableId]) {
         delete storedCarts[tableId];
@@ -86,7 +89,7 @@ export default function Cart_lists() {
       }
       setcartItems([]);
       setEachtotal([]);
-      setRequest()
+      setRequest("")
     } catch (error) {
       console.error("Error placing order:", error);
       alert("Error occurs while placing an order!!!");
@@ -99,9 +102,6 @@ export default function Cart_lists() {
       setIsOrdering(false);
     }
   };
-
-
-
 
 
 
@@ -195,6 +195,7 @@ export default function Cart_lists() {
         <div className="mt-6 flex flex-col  justify-center ">
           <label className="text-center mb-4 text-xl" htmlFor="request">Any Request !!!</label>
           <input id="request" type="text" className="h-[10vh] w-[30vw] border-1 outline-0 rounded-md px-2 mx-auto "
+            value={request || ""} 
             onChange={(e) => {
               setRequest(e.target.value)
             }
@@ -205,8 +206,9 @@ export default function Cart_lists() {
         <div className="mt-6 flex justify-center ">
           <button
             className="bg-green-500 text-white rounded-md px-4 py-2 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-sm md:text-base"
-            onClick={handleOrderAll}
+            onClick={(handleOrderAll)}
             disabled={isOrdering}
+          
           >
             {isOrdering ? "Ordering..." : "Order All"}
           </button>

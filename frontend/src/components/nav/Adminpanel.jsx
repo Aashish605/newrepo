@@ -91,9 +91,6 @@ export default function Adminpanel() {
 
   return (
     <div className="p-6 min-h-[50vh]">
-      <h1 className="lg:text-2xl text-xl text-center  font-bold my-4">
-        Admin Panel - Order Management
-      </h1>
       {data.length > 0 ? (
         <AdminOrderList
           orders={data}

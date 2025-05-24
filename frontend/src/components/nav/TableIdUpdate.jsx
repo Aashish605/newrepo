@@ -10,6 +10,8 @@ const TableIdUpdate = (props) => {
 
     const updateId = async () => {
         try {
+            console.log(value,orderId);
+            
             await axios.patch("https://newrepo-backend.vercel.app/updateId", {
                 _id: orderId,
                 tableId: value

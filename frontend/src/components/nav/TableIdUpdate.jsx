@@ -1,16 +1,19 @@
 import React,{useState} from 'react'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const TableIdUpdate = (props) => {
     const tableId = props.tableId;
     const orderId = props.orderId;
     const [value, setValue] = useState();
+    const navigate = useNavigate();
 
     const updateId = async () => {
         await axios.patch("https://newrepo-backend.vercel.app/updateId",{
             _id : orderId,
             tableId : value
         })
+        navigate("/adminpanel")
     }
 
 

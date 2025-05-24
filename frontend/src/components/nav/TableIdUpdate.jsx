@@ -16,6 +16,7 @@ const TableIdUpdate = (props) => {
                 _id: orderId,
                 tableId: value
             });
+            props.onClose();
             navigate("/adminpanel");
         } catch (err) {
             alert("Failed to update table ID");
@@ -27,7 +28,7 @@ const TableIdUpdate = (props) => {
         <>
             <div className="fixed inset-0 flex items-center justify-center z-10">
                 <div className="h-[70vh] w-[70vw] flex items-center flex-col justify-center  bg-white shadow-xl ">
-                    <h2 className='my-6 text-2xl underline'>Edit The Table Id</h2>
+                    <h2 className='my-6 text-2xl underline mx-2'>Edit The Table Id</h2>
                     <p className='hidden'>
                         Order Id : {orderId}
                     </p>
@@ -36,7 +37,7 @@ const TableIdUpdate = (props) => {
                     </p>
                     <p>
                         <label htmlFor="new" className='text-xl'>New Table Id : </label>
-                        <input type="number" className='border-2 rounded-md my-6 px-2 w-[5vw] ' name="" id="new"
+                        <input type="number" className='border-2 rounded-md my-6 px-2 w-[5vw] max-sm:w-[10vw] ' name="" id="new"
                             value={value}
                             onChange={(e) => {
                                 setValue(e.target.value)

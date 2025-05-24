@@ -194,7 +194,7 @@ export default function Cart_lists() {
 
         <div className="mt-6 flex flex-col  justify-center ">
           <label className="text-center mb-4 text-xl" htmlFor="request">Any Request !!!</label>
-          <input id="request" type="text" className="h-[10vh] w-[30vw] border-1 outline-0 rounded-md px-2 mx-auto "
+          <input id="request" type="text" className="h-[10vh] w-[30vw] max-sm:w-[60vw] border-1 outline-0 rounded-md px-2 mx-auto "
             value={request || ""} 
             onChange={(e) => {
               setRequest(e.target.value)

@@ -1,8 +1,7 @@
 //carts lists
 import React, { useState, useEffect } from "react";
-import Nav from "../nav/Nav";
 import axios from "axios";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export default function Cart_lists() {
   const [eachtotal, setEachtotal] = useState([]);
@@ -11,7 +10,6 @@ export default function Cart_lists() {
   const [isOrdering, setIsOrdering] = useState(false);
   const [searchParams] = useSearchParams();
 
-  const navigate = useNavigate()
   const tableId = searchParams.get("tableId");
 
   useEffect(() => {

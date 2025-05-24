@@ -51,10 +51,11 @@ const Search = (props) => {
         if (database && database.length > 0) {
             performSearch(data, database);
         }
-    }, [database, data]);
+    }, [database, data ]);
 
     const fuseOptions = {
         isCaseSensitive: false,
+        minMatchCharLength : 3 ,
         keys: ["productname"]
     };
 
@@ -132,17 +133,17 @@ const updateQuantity = (id, amount) => {
 
     return (
         <>
-            <div className={`search ${data ? " h-fit pb-10 absolute top-[11vh] shadow-md right-0 z-50 bg-white w-[40vw]" : "hidden"} ${close?"hidden":""} `}>
+            <div className={`search ${data ? " h-fit pb-6 absolute  top-[100%] shadow-md right-0 z-50 bg-white w-fit max-[815px]:w-full " : "hidden"} ${close?"hidden":""} `}>
                 {result.length > 0 ? (
-                    <div className='px-4 py-2 text-xl  '>
+                    <div className='px-4  py-2 text-xl  '>
                         {result.map(item => (
-                            <div className='list-disc mx-2 flex items-center justify-between px-8 gap-6 my-8' key={item?.item?._id}>
+                            <div className='list-disc mx-2 flex flex-wrap items-center justify-between px-8 gap-6 my-8 max-[571px]:text-[1rem] ' key={item?.item?._id}>
                                 <p>{item.productname} </p>
                                 <p>Rs.{item.price}</p>
                                 <label className="" htmlFor="quantity">
                                     Quantity :&nbsp;
                                     <input
-                                        className="w-[8vw] sm:w-[4vw] lg:w-[2vw] text-center outline-0 rounded-sm border-1 appearance-none"
+                                        className="w-[12vw] sm:w-[4vw] lg:w-[2vw] text-center outline-0 rounded-sm border-1 appearance-none"
                                         type="number"
                                         min={1}
                                         placeholder={item.Quantity}
@@ -155,6 +156,7 @@ const updateQuantity = (id, amount) => {
                                         notify(item.productname);
                                     }}
                                 >Add to cart</button>
+                                <p className='w-full h-1 border-b-2 '></p>
                             </div>
                         ))}
                     </div>

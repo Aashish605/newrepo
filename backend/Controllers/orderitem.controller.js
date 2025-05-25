@@ -5,8 +5,8 @@ import axios from "axios";
 
 
 const sendTelegramMessage = async () => {
-  const botToken = '7639708146:AAEG7TIormNlA2AcUr5xzVf4tIz7I2zpX9g';
-  const chatId = '1985181785';
+  const botToken = process.env.bot;
+  const chatId = process.env.admin;
 
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 

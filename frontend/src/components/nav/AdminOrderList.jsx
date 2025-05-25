@@ -7,8 +7,8 @@ export default function AdminOrderList({
   confirmedOrderIds,
   handleConfirmPayment,
   handlePaid,
-}
-) {
+  onTableIdUpdate, // Receive the callback
+}) {
   const [editingOrderId, setEditingOrderId] = useState(null);
 
   return (
@@ -19,7 +19,6 @@ export default function AdminOrderList({
       <table className="w-3/5  shadow-md rounded-lg m-auto">
         <thead className="bg-gray-100">
           <tr>
-            {/* <th className="py-2 px-3 border-b text-left text-sm md:text-base">Order ID</th> */}
             <th className="py-2 px-12 lg:px-5 border-b text-left text-sm md:text-base">
               Table ID
             </th>
@@ -46,7 +45,6 @@ export default function AdminOrderList({
         <tbody>
           {orders.map((order) => (
             <tr key={order._id} className="hover:bg-gray-50">
-              {/* <td className="py-1 px-3 border-b font-semibold text-sm md:text-base">{order._id}</td> */}
               <td className="py-1 px-2 border-b  md:text-base ">
                 {order.tableId}
               </td>
@@ -56,12 +54,10 @@ export default function AdminOrderList({
               <td className="py-1 px-2 border-b text-sm md:text-base">
                 {new Date(order.OrderDate).toLocaleString("en-NP", {
                   timeZone: "Asia/Kathmandu",
-                  // year: "numeric",
                   month: "long",
                   day: "numeric",
                   hour: "numeric",
                   minute: "numeric",
-                  // second: "numeric",
                 })}
               </td>
               <td className="py-1 px-2 border-b text-sm md:text-base">
@@ -70,8 +66,7 @@ export default function AdminOrderList({
                     <li key={index} className="text-[1.1rem]">
                       <span className="font-medium">
                         {item.Quantity}-{item.productname}
-                      </span>{" "}
-                      {/* - <span>Rs {item.price}</span> */}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -125,6 +120,7 @@ export default function AdminOrderList({
                         orderId={order._id}
                         tableId={order.tableId}
                         onClose={() => setEditingOrderId(null)}
+                        onTableIdUpdate={onTableIdUpdate} // Pass the callback to TableIdUpdate
                       />
                     )}
                   </div>

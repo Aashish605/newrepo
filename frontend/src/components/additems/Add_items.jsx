@@ -1,8 +1,37 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export default function Add_Items() {
+
+  const notifySuccess = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+    const notifyError = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+
   const navigate = useNavigate();
 
   const [formdata, Setformdata] = useState({
@@ -18,12 +47,12 @@ export default function Add_Items() {
         "https://newrepo-backend.vercel.app/additems",
         formdata
       );
-      alert("Item is added");
+      notifySuccess("Item is added");
       console.log("Server response", response.data);
       navigate("/additems");
       Setformdata({ category: "", productname: "", price: 0 });
     } catch (error) {
-      alert("Error during Item saving");
+      notifyError("Error druing saving")
       console.error("Error during item saving", error);
     }
   };
@@ -41,9 +70,9 @@ export default function Add_Items() {
     });
   };
 
-  const handleBack = () => {
-    navigate("/"); //Navigate back the home page
-  };
+  // const handleBack = () => {
+  //   navigate("/"); //Navigate back the home page
+  // };
 
   return (
     <>
@@ -53,7 +82,7 @@ export default function Add_Items() {
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto p-6 bg-white rounded-md shadow-lg"
+        className="max-w-md mx-auto p-6 my-10 bg-white rounded-md shadow-lg"
       >
         <div className="mb-4">
           <label
@@ -119,12 +148,12 @@ export default function Add_Items() {
         </button>
       </form>
 
-      <button
+      {/* <button
         className="px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white rounded hover:cursor-pointer ml-5 md:ml-2 mt-5"
         onClick={() => handleBack()}
       >
         Back
-      </button>
+      </button> */}
     </>
   );
 }

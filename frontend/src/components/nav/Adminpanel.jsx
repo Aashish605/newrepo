@@ -2,12 +2,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminOrderList from "./AdminOrderList";
+import { toast } from "react-toastify";
 
 export default function Adminpanel() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [confirmedOrderIds, setConfirmedOrderIds] = useState(new Set());
+  const [updateTrigger, setUpdateTrigger] = useState(false); // State to track updates
+
+    const notifyError = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +39,11 @@ export default function Adminpanel() {
     };
 
     fetchData();
-  }, []);
+  }, [updateTrigger]); // Refetch orders when `updateTrigger` changes
+
+  const handleTableIdUpdate = () => {
+    setUpdateTrigger((prev) => !prev); // Toggle the state to trigger useEffect
+  };
 
   if (loading) {
     return (
@@ -60,13 +81,13 @@ export default function Adminpanel() {
       setConfirmedOrderIds((prevSet) => new Set(prevSet).add(orderId));
     } catch (err) {
       console.error("Error confirming payment:", err);
-      alert("Failed to confirm payment. Check console.");
+      notifyError("Failed to confirm payment. Check console.");
     }
   };
 
   const handlePaid = async (orderId) => {
     if (!confirmedOrderIds.has(orderId)) {
-      alert("Order must be confirmed before marking as paid.");
+      notifyError("Order must be confirmed before marking as paid.");
       return;
     }
     try {
@@ -85,7 +106,7 @@ export default function Adminpanel() {
       });
     } catch (err) {
       console.error("Error marking order as paid:", err);
-      alert("Failed to mark order as paid.");
+      notifyError("Failed to mark order as paid.");
     }
   };
 
@@ -97,6 +118,7 @@ export default function Adminpanel() {
           confirmedOrderIds={confirmedOrderIds}
           handleConfirmPayment={handleConfirmPayment}
           handlePaid={handlePaid}
+          onTableIdUpdate={handleTableIdUpdate} // Pass the callback to AdminOrderList
         />
       ) : (
         <div className="text-gray-600 italic">No orders found.</div>

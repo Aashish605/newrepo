@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {  useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Cart_lists() {
   const [eachtotal, setEachtotal] = useState([]);
@@ -11,6 +12,21 @@ export default function Cart_lists() {
   const [searchParams] = useSearchParams();
 
   const tableId = searchParams.get("tableId");
+
+
+    const notifyError = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
 
   useEffect(() => {
     if (!tableId) {
@@ -89,7 +105,7 @@ export default function Cart_lists() {
       setRequest("")
     } catch (error) {
       console.error("Error placing order:", error);
-      alert("Error occurs while placing an order!!!");
+      notifyError("Error occurs while placing an order!!!")
       if (error.response) {
         console.log("Response data:", error.response.data);
         console.log("Response status:", error.response.status);

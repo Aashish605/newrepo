@@ -1,25 +1,39 @@
 import React, { useState } from 'react'
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const TableIdUpdate = (props) => {
     const tableId = props.tableId;
     const orderId = props.orderId;
     const [value, setValue] = useState();
-    const navigate = useNavigate();
+    const [updating, setUpdating] = useState(false);
+
+    const notifyError = (message) => {
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+        });
+    };
+
 
     const updateId = async () => {
         try {
-            console.log(value,orderId);
-            
+            setUpdating(true)
             await axios.patch("https://newrepo-backend.vercel.app/updateId", {
                 _id: orderId,
-                tableId: value
+                tableId: value,
             });
             props.onClose();
-            navigate("/adminpanel");
+            setUpdating(false)
+            props.onTableIdUpdate(); // Trigger the callback to refetch orders
         } catch (err) {
-            alert("Failed to update table ID");
+            notifyError("Failed to update table ID");
             console.error(err);
         }
     }
@@ -52,10 +66,11 @@ const TableIdUpdate = (props) => {
                         Close
                     </button>
                     <button
-                        className="mt-4 px-4 py-2 bg-green-500 cursor-pointer text-white rounded"
+                        className={`mt-4 px-4 py-2 bg-green-500 cursor-pointer text-white rounded disabled:bg-gray-400 disabled:text-black `}
                         onClick={updateId}
+                        disabled={updating}
                     >
-                        Update
+                        {updating ? "Updating" : "Update"}
                     </button>
                 </div>
             </div>

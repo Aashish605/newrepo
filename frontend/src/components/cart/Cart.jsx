@@ -1,28 +1,33 @@
-//Cart.jsx
 import React from "react";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
-// import "./ToastStyles.css";
+import { toast } from "react-toastify";
 
 export default function Cart() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const tableId = searchParams.get("tableId");
 
+    const notifyError = (message) => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+
+
   const handleCarting = () => {
     if (tableId) {
       navigate(`/carting?tableId=${tableId}`);
     } else {
-      alert("Please scan a QR code first.");
-      // toast.error("Please scan a Qr code first.", {
-      //   autoClose: 2000,
-      //   hideProgressBar: true,
-      //   closeOnClick: false,
-      //   pauseOnHover: false,
-      //   draggable: false,
-      //   className: "toast-center",
-      // });
+      notifyError("Please scan a QR code first.");
+
     }
   };
 

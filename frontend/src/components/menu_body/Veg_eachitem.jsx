@@ -1,5 +1,4 @@
-// Special_eachitem.jsx
-//clear
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";

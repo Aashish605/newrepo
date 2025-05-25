@@ -1,7 +1,6 @@
 import { request } from "express";
 import Orderitem from "../Models/orderitem.Model.js";
 import moment from "moment-timezone";
-import admin from '../firebase.js'; // Import Firebase Admin
 
 export const postsaveorders = async (req, res) => {
   try {

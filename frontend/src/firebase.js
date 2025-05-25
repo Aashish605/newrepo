@@ -13,10 +13,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
+// Register the service worker
+navigator.serviceWorker
+    .register('/firebase-messaging-sw.js')
+    .then((registration) => {
+        messaging.useServiceWorker(registration);
+    })
+    .catch((error) => {
+        console.error('Service Worker registration failed:', error);
+    });
+
 // Request permission and get FCM token
 export const requestNotificationPermission = async () => {
     try {
-        const token = await getToken(messaging, { vapidKey: 'BK4nlGgQvf4JFZVPCFkQ-GfEYy_ewcRZXd4nQlnQwrM7UFD8zzKSp4jNijacK_2_A8PnUKPg9DOVEMlm1bKl5Bg' });
+        const token = await getToken(messaging, { vapidKey: 'YOUR_VAPID_KEY' });
         if (token) {
             console.log('FCM Token:', token);
             return token;

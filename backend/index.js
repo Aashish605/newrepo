@@ -22,7 +22,6 @@ app.use(
   cors({
     origin: [
       "https://newrepo-frontend.vercel.app",
-
       "http://localhost:5173"
     ],
     credentials: true,

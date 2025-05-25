@@ -13,8 +13,7 @@ import bcrypt from 'bcryptjs'
 
 dotenv.config();
 
-// hello i 
-
+// hello
 const app = express();
 
 app.use(

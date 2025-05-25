@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa"; // Import icons
 
 const Footer = () => {
   return (
     <>
       <div className="bg-black text-white">
-        <div className="flex flex-wrap justify-between w-full p-10 gap-y-10">
+        <div className="flex flex-wrap justify-between w-full p-10 gap-8">
           {/* About Us Section */}
           <div className="w-full  sm:w-[30%]">
             <p className="text-xl max-[550px]:pt-8">About Us</p>
@@ -18,9 +18,9 @@ const Footer = () => {
           <div className="w-full text-center sm:w-[30%]">
             <p className="text-xl">Quick Links</p>
             <div className="text-gray-300 text-[0.9rem]">
-              <NavLink to={'/'}><li className="hover:text-white hover:underline decoration-0 hover:underline-offset-4 cursor-pointer list-none mt-5">Menu</li></NavLink>
-              <NavLink to={'/aboutus'}><li className="hover:text-white hover:underline decoration-0 hover:underline-offset-4 cursor-pointer list-none mt-2">About Us</li></NavLink>
-              <NavLink to={'/LogIn'}><li className="hover:text-white hover:underline decoration-0 hover:underline-offset-4 cursor-pointer list-none mt-2">Log In</li></NavLink>
+              <li className="hover:text-white hover:underline decoration-0 hover:underline-offset-4 cursor-pointer list-none mt-5">Menu</li>
+              <li className="hover:text-white hover:underline decoration-0 hover:underline-offset-4 cursor-pointer list-none mt-2">About Us</li>
+              <li className="hover:text-white hover:underline decoration-0 hover:underline-offset-4 cursor-pointer list-none mt-2">Log In</li>
             </div>
           </div>
 

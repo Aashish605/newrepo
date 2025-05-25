@@ -1,6 +1,25 @@
 import { request } from "express";
 import Orderitem from "../Models/orderitem.Model.js";
 import moment from "moment-timezone";
+import axios from "axios";
+
+
+const sendTelegramMessage = async () => {
+  const botToken = '7639708146:AAEG7TIormNlA2AcUr5xzVf4tIz7I2zpX9g';
+  const chatId = '1985181785';
+
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+  try {
+    await axios.post(url, {
+      chat_id: chatId,
+      text: "new order" ,
+    });
+    console.log('Telegram message sent.');
+  } catch (error) {
+    console.error('Error sending Telegram message:', error.message);
+  }
+};
 
 export const postsaveorders = async (req, res) => {
   try {
@@ -32,6 +51,7 @@ export const postsaveorders = async (req, res) => {
       request: request,
     });
     await newOrder.save();
+    await sendTelegramMessage();
     res.status(201).json({ message: "Order placed successfully" });
   } catch (error) {
     console.log("Error during saving order:", error);

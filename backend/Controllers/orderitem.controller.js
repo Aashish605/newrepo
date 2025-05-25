@@ -109,27 +109,3 @@ export const postupdateId = async (req, res) => {
   }
 }
 
-export const placeOrder = async (req, res) => {
-  try {
-    const { orderDetails, adminToken } = req.body; // Ensure adminToken is sent from the frontend
-
-    // Save order logic
-    // ...existing code to save the order...
-
-    // Send notification to admin
-    const message = {
-      notification: {
-        title: 'New Order Placed',
-        body: `Order ID: ${orderDetails.id} has been placed.`,
-      },
-      token: adminToken, // Admin's FCM token
-    };
-
-    await admin.messaging().send(message);
-
-    res.status(200).json({ message: 'Order placed and notification sent!' });
-  } catch (error) {
-    console.error('Error placing order:', error);
-    res.status(500).json({ error: 'Failed to place order' });
-  }
-};

@@ -10,7 +10,6 @@ import connectMongo from "connect-mongo";
 import { Strategy as LocalStrategy } from "passport-local";
 import loginSchema from "./Models/login.Model.js";
 import bcrypt from 'bcryptjs'
-import adminRoutes from './Routes/admin.route.js';
 
 dotenv.config();
 
@@ -62,7 +61,6 @@ app.use(passport.session());
 
 app.use("/", items);
 app.use("/", orderitem);
-app.use('/api/admin', adminRoutes);
 
 passport.use(new LocalStrategy(
   async function (username, password, done) {

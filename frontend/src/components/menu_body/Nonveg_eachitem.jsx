@@ -128,7 +128,7 @@ export default function Nonveg_eachitem() {
                 className="h-[20vh] object-center object-contain group-hover:scale-105 duration-500"
                 src={
                   item.productname === "Chicken Chowmin"
-                    ? "/nonvegimg/Chicken Chowmin.png"
+                    ? "/nonvegimg/Chicken Chowmin.webp"
                     : item.productname === "Chicken Fried Rice"
                       ? "/nonvegimg/Chicken Fried Rice.webp"
                       : item.productname === "Chicken Khana"

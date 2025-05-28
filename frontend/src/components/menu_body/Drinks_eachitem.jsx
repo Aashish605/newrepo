@@ -128,14 +128,14 @@ export default function Drinks_eachitem() {
                 className="h-[20vh] object-center object-contain group-hover:scale-105 duration-500"
                 src={
                   item.productname === "Dew"
-                    ? "/drinking/Dew.webp"
-                    : item.productname === "Fanta"
-                      ? "/drinking/Fanta.webp"
+                    ? "/drinkimg/Dew.webp"
+                    : item.productnadrinkimge === "Fanta"
+                      ? "/drinkimg/Fanta.webp"
                       : item.productname === "Frooti"
-                        ? "/drinking/Frooti.webp"
+                        ? "/drinkimg/Frooti.webp"
                         : item.productname === "Mineral-Water"
-                          ? "/drinking/Mineral-Water.webp"
-                          : item.productname === "Real-Juice"
+                          ? "/drinkimg/Mineral-Water.webp"
+                          : null
                 }
                 alt="loading"
               />

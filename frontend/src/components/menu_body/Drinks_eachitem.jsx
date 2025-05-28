@@ -126,7 +126,17 @@ export default function Drinks_eachitem() {
             <div className="Eachitem-photo flex justify-center overflow-hidden">
               <img
                 className="h-[20vh] object-center object-contain group-hover:scale-105 duration-500"
-                src="/images/Drinks.jpg"
+                src={
+                  item.productname === "Dew"
+                    ? "/drinking/Dew.webp"
+                    : item.productname === "Fanta"
+                      ? "/drinking/Fanta.webp"
+                      : item.productname === "Frooti"
+                        ? "/drinking/Frooti.webp"
+                        : item.productname === "Mineral-Water"
+                          ? "/drinking/Mineral-Water.webp"
+                          : item.productname === "Real-Juice"
+                }
                 alt="loading"
               />
             </div>

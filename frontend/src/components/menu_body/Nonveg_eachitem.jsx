@@ -126,7 +126,27 @@ export default function Nonveg_eachitem() {
             <div className="Eachitem-photo flex justify-center overflow-hidden">
               <img
                 className="h-[20vh] object-center object-contain group-hover:scale-105 duration-500"
-                src="/images/Nonveg.jpg"
+                src={
+                  item.productname === "Chicken Chowmin"
+                    ? "/nonvegimg/Chicken Chowmin.png"
+                    : item.productname === "Chicken Fried Rice"
+                      ? "/nonvegimg/Chicken Fried Rice.webp"
+                      : item.productname === "Chicken Khana"
+                        ? "/nonvegimg/Chicken Khana.webp"
+                        : item.productname === "Chicken Momo"
+                          ? "/nonvegimg/Chicken Momo.webp"
+                          : item.productname === "Chicken Rice"
+                            ? "/nonvegimg/Chicken Rice.webp"
+                            : item.productname === "Mutton Momo"
+                              ? "/nonvegimg/Mutton Momo.webp"
+                              : item.productname === "Mutton-Biryani"
+                                ? "/nonvegimg/Mutton-Biryani.webp"
+                                : item.productname === "Mutton-Khana"
+                                  ? "/nonvegimg/Mutton-Khana.webp"
+                                  : item.productname === "Mutton-Sekuwa"
+                                    ? "/nonvegimg/Mutton-Sekuwa.webp"
+                                    : ""
+                }
                 alt="loading"
               />
             </div>

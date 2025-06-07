@@ -10,6 +10,7 @@ import connectMongo from "connect-mongo";
 import { Strategy as LocalStrategy } from "passport-local";
 import loginSchema from "./Models/login.Model.js";
 import bcrypt from 'bcryptjs'
+import { EsewaInitiatePayment, paymentStatus } from "./Controllers/esewa.controller.js"
 
 dotenv.config();
 
@@ -143,6 +144,9 @@ app.get("/check", async (req, res) => {
     })
   }
 })
+
+app.post("/initiate-payment", EsewaInitiatePayment);
+app.post("/payment-status", paymentStatus);
 
 
 async function startServer() {

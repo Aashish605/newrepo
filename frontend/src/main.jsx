@@ -13,20 +13,25 @@ import WrapComponent from './Wrapcomponent.jsx'
 import Protectedroute from './components/protectedroute/Protectedroute.jsx'
 import Signup from "./components/login_admin/Signup";
 import Login from "./components/login_admin/Login";
+import Failure from "./components/Esewa/Failure.jsx";
+import Sucess from "./components/Esewa/Sucess.jsx";
+import PaymentForm from "./components/Esewa/PaymentForm.jsx";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<App />}>
     <Route path='' element={<WrapComponent />} />
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup />} />
-    {/* Protected routes should come after auth routes */}
     <Route element={<Protectedroute />}>
       <Route path="/adminpanel" element={<Adminpanel />} />
-      <Route path="/additems" element={<AddItems />} /> {/* This should also be protected */}
+      <Route path="/additems" element={<AddItems />} /> 
     </Route>
     <Route path="/contactus" element={<Contactus />} />
     <Route path="/aboutus" element={<Aboutus />} />
     <Route path="/carting" element={<Cart_lists />} />
+    <Route path='/pay' element={<PaymentForm/>} />
+    <Route path='/pay-sucess' element={<Sucess/>} />
+    <Route path='/pay-fail' element={<Failure/>} />
   </Route>
 ));
 createRoot(document.getElementById('root')).render(

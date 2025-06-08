@@ -11,10 +11,33 @@ import { Strategy as LocalStrategy } from "passport-local";
 import loginSchema from "./Models/login.Model.js";
 import bcrypt from 'bcryptjs'
 import { EsewaInitiatePayment, paymentStatus } from "./Controllers/esewa.controller.js"
+import { Server } from 'socket.io'
+import http from 'http'
 
 dotenv.config();
 
 const app = express();
+
+const server = http.createServer(app)
+const io = new Server(server, {
+  cors: {
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "https://newrepo-frontend.vercel.app",
+        "http://localhost:5173"
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
+    exposedHeaders: ["Set-Cookie"]
+  }
+})
 
 app.use(
   cors({
@@ -65,6 +88,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  req.io = io; // Attach the io instance to the request object
+  next();
+});
 app.use("/", items);
 app.use("/", orderitem);
 
@@ -152,7 +179,7 @@ app.post("/payment-status", paymentStatus);
 async function startServer() {
   try {
     await ConnectDB();
-    app.listen(process.env.PORT, () => {
+    server.listen(process.env.PORT, () => {
       console.log(`App is listening on port ${process.env.PORT}`);
     });
   } catch (error) {

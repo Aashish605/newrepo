@@ -53,6 +53,8 @@ export const postsaveorders = async (req, res) => {
     });
     await newOrder.save();
     await sendTelegramMessage();
+
+    req.io.emit("orderUpdated",{message:"New order added",order:newOrder})
     res.status(201).json({ message: "Order placed successfully" });
   } catch (error) {
     console.log("Error during saving order:", error);

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminOrderList from "./AdminOrderList";
 import { toast } from "react-toastify";
+import {io} from 'socket.io-client'
 
 export default function Adminpanel() {
   const [data, setData] = useState([]);
@@ -37,9 +38,17 @@ export default function Adminpanel() {
         setLoading(false);
       }
     };
-
     fetchData();
-  }, [updateTrigger]); // Refetch orders when `updateTrigger` changes
+    const socket = io("http://localhost:8080");
+    socket.on("orderUpdated",() => {
+      fetchData();
+    }
+    )
+    return () => {
+      socket.disconnect();
+    }
+    
+  }, [updateTrigger]); 
 
   const handleTableIdUpdate = () => {
     setUpdateTrigger((prev) => !prev); // Toggle the state to trigger useEffect
